@@ -5,6 +5,12 @@ class problem(MovingCameraScene):
 
     def construct(self):
 
+        title = MathTex(r'\text{Visualization:}')
+        self.play(ShowCreation(title))
+        self.wait(1)
+        self.play(Uncreate(title))
+        self.wait(1)
+
         start_dot = Dot(point=[-5,.25,0])
         end_dot = Dot(point=[4,.25,0])
 
@@ -15,11 +21,16 @@ class problem(MovingCameraScene):
         nine_brace = Brace(base_line, direction=UP)
         nine_brace_text = nine_brace.get_text("9")
 
-        self.play(ShowCreation(start_dot))
-        self.play(ShowCreation(end_dot))
-        self.play(ShowCreation(base_line))
-        self.play(ShowCreation(nine_brace))
-        self.play(ShowCreation(nine_brace_text))
+        self.play(
+                ShowCreation(start_dot),
+                ShowCreation(end_dot),
+                ShowCreation(base_line)
+                )
+
+        self.play(
+                ShowCreation(nine_brace),
+                ShowCreation(nine_brace_text)
+                )
         self.wait(1)
 
         self.play(ShowCreation(slice_line))
@@ -30,21 +41,25 @@ class problem(MovingCameraScene):
         base_brace.set_color(BLUE)
         brace_text = base_brace.get_text("8")
 
-        self.play(ShowCreation(base_brace))
-        self.play(ShowCreation(brace_text))
+        self.play(
+                ShowCreation(base_brace),
+                ShowCreation(brace_text)
+                )
         self.wait(2)
 
-        self.play(Uncreate(nine_brace))
-        self.play(Uncreate(nine_brace_text))
+        self.play(
+                Uncreate(nine_brace),
+                Uncreate(nine_brace_text)
+                )
         self.wait(2)
-
-        # 2nd
 
         top_left = Dot(point=[-5,9.25,0])
         top_right = Dot(point=[4,9.25,0])
 
-        self.play(ShowCreation(top_left))
-        self.play(ShowCreation(top_right))
+        self.play(
+                ShowCreation(top_left),
+                ShowCreation(top_right)
+                )
 
         self.play(self.camera_frame.move_to, [0,4.75,0],
                   self.camera_frame.set_width, 30)
@@ -64,8 +79,9 @@ class problem(MovingCameraScene):
         vert_line = Line(start=[-5,.25,0], end=[-5,9.25,0])
         vert_brace = Brace(vert_line, direction=LEFT)
         vert_brace_text = vert_brace.get_text("9")
-        self.play(ShowCreation(vert_brace))
-        self.play(ShowCreation(vert_brace_text))
+        self.play(
+                ShowCreation(vert_brace),
+                ShowCreation(vert_brace_text))
 
         apart = Line(start=[-5,1.25,0], end=[3,1.25,0])
         self.play(ShowCreation(apart))
@@ -76,8 +92,10 @@ class problem(MovingCameraScene):
         vert_brace_prime.set_color(BLUE)
         vert_brace_text_prime = vert_brace_prime.get_text("8")
 
-        self.play(Transform(vert_brace, vert_brace_prime))
-        self.play(Transform(vert_brace_text, vert_brace_text_prime))
+        self.play(
+                Transform(vert_brace, vert_brace_prime),
+                Transform(vert_brace_text, vert_brace_text_prime)
+                )
         self.wait(1)
 
         framebox = Rectangle(width=9.1, height=1.1, stroke_width=7)
